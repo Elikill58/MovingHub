@@ -10,10 +10,17 @@ import net.md_5.bungee.config.Configuration;
 public class ServerGroup {
 
 	private final List<String> names, contains;
+	private boolean ignoreCase;
 	
 	public ServerGroup(Configuration config) {
-		this.names = config.getStringList("names");
-		this.contains = config.getStringList("contains");
+		this.ignoreCase = config.getBoolean("ignore_case", true);
+		if(ignoreCase) {
+			this.names = config.getStringList("names").stream().map(String::toLowerCase).collect(Collectors.toList());
+			this.contains = config.getStringList("contains").stream().map(String::toLowerCase).collect(Collectors.toList());
+		} else {
+			this.names = config.getStringList("names");
+			this.contains = config.getStringList("contains");
+		}
 	}
 	
 	public List<String> getContains() {
@@ -26,10 +33,10 @@ public class ServerGroup {
 	
 	public List<ServerInfo> getServers() {
 		return ProxyServer.getInstance().getServers().values().stream().filter(si -> {
-			if(names.contains(si.getName()))
+			if(names.contains(ignoreCase ? si.getName().toLowerCase() : si.getName()))
 				return true;
 			for(String s : contains)
-				if(si.getName().contains(s))
+				if((ignoreCase ? si.getName().toLowerCase() : si.getName()).contains(s))
 					return true;
 			return false;
 		}).collect(Collectors.toList());

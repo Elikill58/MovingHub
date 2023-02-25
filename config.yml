@@ -1,3 +1,5 @@
+debug: false
+
 detect-shutdown:
 - "shutdown"
 - "restart"
@@ -5,11 +7,13 @@ detect-shutdown:
 
 groups:
   ignored:
+    ignore_case: true
     names:
     - "Connect-01"
     contains:
     - "connect"
   redirect:
+    ignore_case: true
     names:
     - "Lobby-01"
     contains:

@@ -71,4 +71,10 @@ public class MovingHub extends Plugin {
 		}
 		return resourceFile;
 	}
+	
+	public static void debug(String msg) {
+		if(config.getBoolean("debug", false)) {
+			getInstance().getLogger().info(msg);
+		}
+	}
 }
