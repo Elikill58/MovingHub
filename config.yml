@@ -1,0 +1,16 @@
+detect-shutdown:
+- "shutdown"
+- "restart"
+- "closed"
+
+groups:
+  ignored:
+    names:
+    - "Connect-01"
+    contains:
+    - "connect"
+  redirect:
+    names:
+    - "Lobby-01"
+    contains:
+    - "lobby"
