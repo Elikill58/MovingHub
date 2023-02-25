@@ -2,6 +2,3 @@ name: MovingHub
 main: com.elikill58.movinghub.MovingHub
 version: 1.0
 author: Elikill58
-commands:
-  redirect:
-    description: "The main command for the MovingHub plugin."
